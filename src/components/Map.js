@@ -1,16 +1,23 @@
 import React from 'react'
+import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { icon } from 'leaflet';
+
+const ICON = icon({
+    iconUrl:"./marker.svg",
+    iconSize: [16,16],
+})
 
 function Map({ countryMonth }) {
     return (
-        <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false} style={{height:200 }}>
+        <MapContainer center={[countryMonth.Lat, countryMonth.Lon]} zoom={1} scrollWheelZoom={false} style={{height:200 }}>
         <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={[51.505, -0.09]}>
+        <Marker icon={ICON} position={[countryMonth.Lat, countryMonth.Lon]}>
             <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
+            {countryMonth.Country} is located here!
             </Popup>
         </Marker>
 </MapContainer>

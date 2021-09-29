@@ -1,13 +1,19 @@
 import React from 'react'
 import LineChart from '../components/LineChart'
-import Map from '../components/Map'
+import dynamic from 'next/dynamic'
+// import Map from '../components/Map'
 import Head from 'next/head'
 import Link from 'next/link'
 import styles from '../styles/Slug.module.css'
 
+const Map = dynamic (
+    () => import('../components/Map'),{
+    loading: () => <p>A map is loading</p>,
+    ssr: false}
+)
+
 export default function Slug({country, countryMonth}) {
-    console.log(country)
-    console.log(countryMonth)
+    
     return (
         <div className={styles.container}>
             <Head>
